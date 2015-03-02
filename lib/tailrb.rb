@@ -2,19 +2,15 @@ require 'tailrb/version'
 require 'json'
 
 class Tailrb
-  DEFAULT_OPTIONS = {
-    bytes: 10000
-  }
 
   def initialize path
     @path = File.expand_path path
   end
 
-  def run options={}
-    options = DEFAULT_OPTIONS.merge options
-    options[:script] ||= default_script_for options[:type] if options.key? :filter
+  def run config={}
+    config = Configuration.new self, config
 
-    self.send method_for(options[:type]), options[:bytes], options[:filter], &options[:script]
+    self.send config.tailf_method, config.bytes, config.filter, &config.script
   end
 
   def tailf bytes=10000, filter=nil
@@ -44,7 +40,7 @@ class Tailrb
         memo
       end.tap do |dat|
         next if filter && !filter.call(dat)
-        block_given? ? yield(dat) : to_tsv(dat)
+        block_given? ? yield(dat) : puts(to_tsv(dat))
       end
     end
   end
@@ -58,24 +54,12 @@ class Tailrb
     end
   end
 
-  def method_for type
-    case type
-    when :tsv then :tailf_tsv
-    else :tailf
-    end
+  def to_s line
+    line.to_s
   end
-  def default_script_for type
-    case type
-    when :tsv then method :out_as_tsv
-    else method :out_as_s
-    end
-  end
-
-  def out_as_s line
-    puts line
-  end
-  def out_as_tsv dat
-    print dat.map{ |k, v| "#{k}:#{v}" }.join("\t")
-    puts
+  def to_tsv dat
+    dat.map{ |k, v| "#{k}:#{v}" }.join("\t")
   end
 end
+
+require 'tailrb/configuration'
