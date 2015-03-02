@@ -1,3 +1,3 @@
-module Tailrb
+class Tailrb
   VERSION = "0.0.1"
 end

@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require 'tailrb'
+
+require 'optparse'
+
+BANNER = <<-EOT
+tailrb is tiny tool to read file like as `tail -f`.
+Usage: tailrb <options> <file>
+EOT
+
+config = {}
+opt = OptionParser.new(BANNER) do |opt|
+  opt.on('-b <bytesize>', Integer, '--bytes', 'byte size of contents that already persisted to read') { |size| config[:bytes] = size }
+  opt.on('-t', '--tsv', 'parse file as TSV') { config[:type] = :tsv }
+  opt.on('-e <script>', '--eval', String, 'script for each lines') { |script| config[:script] = proc { |line| $_ = line; instance_eval script } }
+  opt.on('-f <script>', '--filter', String, 'script to filter lines') { |script| config[:filter] = proc { |line| $_ = line; instance_eval script } }
+  opt.parse! ARGV
+end
+
+unless ARGV.length == 1
+  STDERR.puts opt.help
+  exit 1
+end
+
+path = ARGV.first
+
+begin
+  Tailrb.new(path).run config
+rescue RuntimeError => e
+  STDERR.puts e
+  exit 1
+end
