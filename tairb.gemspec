@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["hiroara62@gmail.com"]
   spec.summary       = %q{tairb is tiny tool to read file like as `tail -f`.}
   spec.description   = %q{tairb is tiny tool to read file like as `tail -f`.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/hiroara/tairb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
