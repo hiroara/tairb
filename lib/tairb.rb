@@ -1,7 +1,7 @@
-require 'tailrb/version'
+require 'tairb/version'
 require 'json'
 
-class Tailrb
+class Tairb
 
   def initialize path
     @path = File.expand_path path
@@ -62,4 +62,4 @@ class Tailrb
   end
 end
 
-require 'tailrb/configuration'
+require 'tairb/configuration'

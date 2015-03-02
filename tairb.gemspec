@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tailrb/version'
+require 'tairb/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "tailrb"
-  spec.version       = Tailrb::VERSION
+  spec.name          = "tairb"
+  spec.version       = Tairb::VERSION
   spec.authors       = ["Arai Hiroki"]
   spec.email         = ["hiroara62@gmail.com"]
-  spec.summary       = %q{tailrb is tiny tool to read file like as `tail -f`.}
-  spec.description   = %q{tailrb is tiny tool to read file like as `tail -f`.}
+  spec.summary       = %q{tairb is tiny tool to read file like as `tail -f`.}
+  spec.description   = %q{tairb is tiny tool to read file like as `tail -f`.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

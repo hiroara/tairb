@@ -1,4 +1,4 @@
-class Tailrb
+class Tairb
   class Configuration
     DEFAULTS = {
       bytes: 10000

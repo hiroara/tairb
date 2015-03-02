@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'tailrb'
+require 'tairb'
 
 require 'optparse'
 
 BANNER = <<-EOT
-tailrb is tiny tool to read file like as `tail -f`.
-Usage: tailrb <options> <file>
+tairb is tiny tool to read file like as `tail -f`.
+Usage: tairb <options> <file>
 EOT
 
 config = {}
@@ -26,7 +26,7 @@ end
 path = ARGV.first
 
 begin
-  Tailrb.new(path).run config
+  Tairb.new(path).run config
 rescue RuntimeError => e
   STDERR.puts e
   exit 1
