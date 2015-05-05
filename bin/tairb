@@ -11,7 +11,7 @@ EOT
 
 config = {}
 opt = OptionParser.new(BANNER) do |opt|
-  opt.on('-b <bytesize>', Integer, '--bytes', 'byte size of contents that already persisted to read') { |size| config[:bytes] = size }
+  opt.on('-b <bytesize>', Integer, '--bytes', 'byte size of content to read at first') { |size| config[:bytes] = size }
   opt.on('-t', '--tsv', 'parse file as TSV') { config[:type] = :tsv }
   opt.on('-e <script>', '--eval', String, 'script for each lines') { |script| config[:script] = proc { |line| $_ = line; instance_eval script } }
   opt.on('-f <script>', '--filter', String, 'script to filter lines') { |script| config[:filter] = proc { |line| $_ = line; instance_eval script } }
